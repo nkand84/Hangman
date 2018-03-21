@@ -3,12 +3,13 @@ wins = 0;
 losses = 0;
 guesses = 9;
 // array of words
-var words = ["cat", "dog", "monkey", "cow", "hamster"];
+var words = ["cat", "dog", "monkey", "cow", "hamster","pig","hippo","rhino","horse","girraffee","seal"];
 //computer generates random word from an array of words, array length is 5
-var computerPick = words[Math.floor(Math.random() * 5)];
+var computerPick = words[Math.floor(Math.random() * 11)];
 console.log(computerPick);
 var blanks = "_";
 var blanksArray = [];
+var userGuessArray = [];
 //this will loop as many times as the length of the word the computer picked
 //each time it loops we get an underscore in our array
 //by the end of the loop the number of underscores is the same as the length of the word the computer picked
@@ -22,7 +23,8 @@ document.onkeyup = function (event) {
     //takes value of the key user enters
     var userGuess = event.key;
     // we need access to each letter of the word that computer guessed 
-
+    userGuessArray.push(userGuess);
+    $("#wrong-guesses").text(userGuessArray);
     var checkIndex = computerPick.indexOf(userGuess);
     if (checkIndex != -1) {
         blanksArray[checkIndex] = userGuess;
@@ -50,9 +52,12 @@ document.onkeyup = function (event) {
         $("#guesses-left").text(guesses);
         // new word 
         computerPick = words[Math.floor(Math.random() * 5)];
-        console.log(computerPick);
         //empty array
         blanksArray = [];
+        //empty user entry values array
+        userGuessArray = [];
+        $("#wrong-guesses").text(userGuessArray);
+        // console.log(userGuessArray);
         for (var i = 0; i < computerPick.length; i++) {
 
             blanksArray.push(blanks);
